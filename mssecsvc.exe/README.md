@@ -214,7 +214,7 @@ if ( send(v3, byte_42E4F4, 78, 0) != -1
 
 
 + 따라서 이 함수는 타겟에 이미 백도어가 심어져 있는지 판별하는 역할을 수행한다고 결론지을 수 있습니다.
-### 4.2. EternalBlue 익스플로잇 [(sub_401370)](./Pseudocode/sub_401370)
+### 5.2. EternalBlue 익스플로잇 [(sub_401370)](./Pseudocode/sub_401370)
 ```c
 v20 = *((double *)v2 + 1252) * 1000.0; // 1. 정밀한 타이밍 계산
 sub_401660((LARGE_INTEGER)(__int64)(v3 * 1000.0)); // 2. 마이크로초 단위 대기
@@ -224,7 +224,7 @@ v6 = sub_401190(v2 + 6, *((_DWORD *)v2 + 2), buf, &v7, &v9); // 3. 패킷 조립
 + 이는 SMB 프로토콜의 취약점을 이용해 커널 메모리 내에서 Race Condition을 유발하기 위한 전형적인 설계로 보입니다.
 
 
-### 4.5. 최종 페이로드 주입 [(sub_4072A0)](./Pseudocode/sub_4072A0)
+### 5.3. 최종 페이로드 주입 [(sub_4072A0)](./Pseudocode/sub_4072A0)
 ```c
 v6 = *(_DWORD *)&buf[18];  // 1. 타겟 아키텍처 정보(x86/x64) 결정
 v7 = sub_406EB0(*(_DWORD *)&buf[18], *(_DWORD *)&buf[22]); // 2. DoublePulsar XOR 키 생성
@@ -234,7 +234,7 @@ sub_406F50(v4, v7, v8);    // 3. 페이로드 주입
 + 파악된 정보를 바탕으로 `sub_406EB0`에서 적절한 쉘코드를 생성합니다.
 + 최종적으로 백도어를 통해 워너크라이 복제본(`mssecsvc.exe`)을 타겟의 메모리에 injection하는 최종 단계입니다.
 
-#### 4.5.1 [(sub_406F50)](./Pseudocode/sub_406F50)
+#### 5.3.1 [(sub_406F50)](./Pseudocode/sub_406F50)
 실제 injection point 입니다.
 + 쉘 코드 및 데이터 준비
 ```c
